@@ -1,0 +1,33 @@
+spring.datasource:
+  url: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+#shareable h2 database: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+  username: sa
+  password: sa
+spring.h2.console.enabled: true
+camunda.bpm:
+  authorization:
+    enabled: true
+  run:
+    ldap:
+      enabled: true
+      userIdAttribute: uid
+      userFirstnameAttribute: cn
+      userSearchFilter: (objectClass=person)
+      serverUrl: ldap://localhost:10389
+      managerDn: uid=admin,ou=system
+      managerPassword: secret
+      baseDN: ou=system
+      groupSearchFilter: (objectClass=groupOfUniqueNames)
+      groupIdAttribute: cn
+      groupNameAttribute: cn
+      groupMemberAttribute: uniqueMember
+  filter:
+    create: All Tasks
+#  default-serialization-format: application/json
+server.port: 8080
+
+myapp.camunda.superadmin:
+  enabled: true
+  user: uid=boss,ou=users,ou=system
+  group: Administrators
+
